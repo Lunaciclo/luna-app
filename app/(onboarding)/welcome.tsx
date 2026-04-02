@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { useRouter } from "expo-router";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
-  withSpring,
+  useSharedValue,
   withDelay,
-  withSequence,
+  withSpring,
   withTiming,
-} from 'react-native-reanimated';
-import { useRouter } from 'expo-router';
-import { Button } from '../../components/ui/Button';
-import { useOnboardingStore } from '../../store/useOnboardingStore';
-import { Colors } from '../../theme/colors';
-import { Typography } from '../../theme/typography';
-import { Spacing } from '../../theme/spacing';
+} from "react-native-reanimated";
+import { Button } from "../../components/ui/Button";
+import { useOnboardingStore } from "../../store/useOnboardingStore";
+import { Colors } from "../../theme/colors";
+import { Spacing } from "../../theme/spacing";
+import { Typography } from "../../theme/typography";
 
 export default function WelcomeScreen() {
   const router = useRouter();
@@ -51,9 +50,7 @@ export default function WelcomeScreen() {
       </Animated.View>
 
       <Animated.View style={titleStyle}>
-        <Text style={styles.title}>
-          Bem-vinda{name ? `, ${name}` : ''}!
-        </Text>
+        <Text style={styles.title}>Bem-vinda{name ? `, ${name}` : ""}!</Text>
         <Text style={styles.subtitle}>
           Sua Luna está pronta. Vamos juntas nessa jornada de autoconhecimento.
         </Text>
@@ -62,7 +59,11 @@ export default function WelcomeScreen() {
       <View style={styles.footer}>
         <Button
           title="Começar a usar a Luna"
-          onPress={() => router.replace('/(app)/today')}
+          onPress={() => {
+            // Navigate to root — index.tsx will see onboarding is complete
+            // and redirect to /(app)/today with a clean stack
+            router.replace("/");
+          }}
           variant="pill"
           fullWidth
         />
@@ -75,8 +76,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.cream,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: Spacing.xl,
   },
   confetti: {
@@ -86,25 +87,25 @@ const styles = StyleSheet.create({
   },
   moon: {
     fontSize: 96,
-    marginBottom: Spacing['2xl'],
+    marginBottom: Spacing["2xl"],
   },
   title: {
     fontFamily: Typography.fonts.displayBold,
-    fontSize: Typography.sizes['3xl'],
+    fontSize: Typography.sizes["3xl"],
     color: Colors.text,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: Spacing.md,
   },
   subtitle: {
     fontFamily: Typography.fonts.body,
     fontSize: Typography.sizes.md,
     color: Colors.textLight,
-    textAlign: 'center',
+    textAlign: "center",
     lineHeight: Typography.sizes.md * Typography.lineHeights.relaxed,
   },
   footer: {
-    position: 'absolute',
-    bottom: Spacing['4xl'],
+    position: "absolute",
+    bottom: Spacing["4xl"],
     left: Spacing.xl,
     right: Spacing.xl,
   },

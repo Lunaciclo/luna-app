@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
-import { OnboardingLayout } from '../../components/onboarding/OnboardingLayout';
-import { Input } from '../../components/ui/Input';
-import { Button } from '../../components/ui/Button';
-import { supabase } from '../../lib/supabase';
-import { useOnboardingStore } from '../../store/useOnboardingStore';
-import { useUserStore } from '../../store/useUserStore';
-import { Colors } from '../../theme/colors';
-import { Typography } from '../../theme/typography';
-import { Spacing } from '../../theme/spacing';
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import { OnboardingLayout } from "../../components/onboarding/OnboardingLayout";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
+import { supabase } from "../../lib/supabase";
+import { useOnboardingStore } from "../../store/useOnboardingStore";
+import { useUserStore } from "../../store/useUserStore";
+import { Colors } from "../../theme/colors";
+import { Spacing } from "../../theme/spacing";
+import { Typography } from "../../theme/typography";
 
 export default function CreateAccountScreen() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const onboarding = useOnboardingStore();
   const { setAuthenticated, setOnboardingComplete } = useUserStore();
@@ -33,7 +33,7 @@ export default function CreateAccountScreen() {
 
       if (authData.user) {
         // Create profile
-        await supabase.from('profiles').insert({
+        await supabase.from("profiles").insert({
           id: authData.user.id,
           name: onboarding.name,
           email,
@@ -45,9 +45,9 @@ export default function CreateAccountScreen() {
 
         // Create cycle
         if (onboarding.lastPeriodDate) {
-          await supabase.from('cycles').insert({
+          await supabase.from("cycles").insert({
             user_id: authData.user.id,
-            start_date: onboarding.lastPeriodDate.toISOString().split('T')[0],
+            start_date: onboarding.lastPeriodDate.toISOString().split("T")[0],
             cycle_length: onboarding.cycleLength,
             flow_length: onboarding.flowLength,
             is_current: true,
@@ -55,7 +55,7 @@ export default function CreateAccountScreen() {
         }
 
         // Create settings
-        await supabase.from('cycle_settings').insert({
+        await supabase.from("cycle_settings").insert({
           user_id: authData.user.id,
           cycle_length: onboarding.cycleLength,
           flow_length: onboarding.flowLength,
@@ -63,21 +63,22 @@ export default function CreateAccountScreen() {
 
         // Save health conditions
         if (onboarding.healthConditions.length > 0) {
-          await supabase.from('health_conditions').insert(
+          await supabase.from("health_conditions").insert(
             onboarding.healthConditions.map((condition) => ({
               user_id: authData.user!.id,
               condition,
-            }))
+            })),
           );
         }
 
         setAuthenticated(true);
         setOnboardingComplete(true);
-        router.replace('/(onboarding)/welcome');
+        router.replace("/(onboarding)/welcome");
       }
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Erro ao criar conta';
-      Alert.alert('Erro', message);
+      const message =
+        error instanceof Error ? error.message : "Erro ao criar conta";
+      Alert.alert("Erro", message);
     } finally {
       setLoading(false);
     }
@@ -114,7 +115,10 @@ export default function CreateAccountScreen() {
           disabled={!email || password.length < 6}
         />
         <Pressable
-          onPress={() => router.replace('/(onboarding)/welcome')}
+          onPress={() => {
+            setOnboardingComplete(true);
+            router.replace("/(onboarding)/welcome");
+          }}
           style={styles.skipButton}
         >
           <Text style={styles.skipText}>Continuar sem conta</Text>
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.xl,
   },
   skipButton: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: Spacing.md,
   },
   skipText: {
