@@ -62,7 +62,7 @@ export default function WelcomeScreen() {
           onPress={() => {
             // Navigate to root — index.tsx will see onboarding is complete
             // and redirect to /(app)/today with a clean stack
-            router.replace("/");
+            router.replace("/(app)/today");
           }}
           variant="pill"
           fullWidth
