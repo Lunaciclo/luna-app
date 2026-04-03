@@ -6,7 +6,15 @@
       "Bash(node -e \"\ntry {\n  const preset = require\\('babel-preset-expo'\\);\n  const config = preset\\(null, {}\\);\n  console.log\\('Plugins:', config.plugins?.map\\(p => Array.isArray\\(p\\) ? p[0] : typeof p === 'string' ? p : p.name || 'unknown'\\).filter\\(Boolean\\).join\\(', '\\)\\);\n} catch\\(e\\) { console.log\\('Error:', e.message\\); }\n\" 2>&1 | head -20)",
       "Bash(node -e \"console.log\\(require\\('babel-preset-expo/package.json'\\).version\\)\" 2>&1)",
       "Bash(node -e \"\nconst path = require\\('path'\\);\nconst presetPath = require.resolve\\('babel-preset-expo'\\);\nconst dir = path.dirname\\(presetPath\\);\nconsole.log\\('Preset dir:', dir\\);\n\" 2>&1)",
-      "Bash(node -e \"\nconst pkg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-reanimated/package.json'\\);\nconsole.log\\('reanimated installed:', pkg.version\\);\nconsole.log\\('reanimated peerDeps worklets:', pkg.peerDependencies['react-native-worklets']\\);\nconst wPkg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-worklets/package.json'\\);\nconsole.log\\('worklets installed:', wPkg.version\\);\nconst svg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-svg/package.json'\\);\nconsole.log\\('svg installed:', svg.version\\);\n\")"
+      "Bash(node -e \"\nconst pkg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-reanimated/package.json'\\);\nconsole.log\\('reanimated installed:', pkg.version\\);\nconsole.log\\('reanimated peerDeps worklets:', pkg.peerDependencies['react-native-worklets']\\);\nconst wPkg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-worklets/package.json'\\);\nconsole.log\\('worklets installed:', wPkg.version\\);\nconst svg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-svg/package.json'\\);\nconsole.log\\('svg installed:', svg.version\\);\n\")",
+      "Bash(node -e \"\ntry {\n  const rea = require\\('/Users/arnaldohelering/luna/node_modules/react-native-reanimated'\\);\n  console.log\\('configureReanimatedLogger:', typeof rea.configureReanimatedLogger\\);\n  console.log\\('ReanimatedLogLevel:', typeof rea.ReanimatedLogLevel\\);\n} catch\\(e\\) {\n  console.log\\('ERROR importing reanimated:', e.message\\);\n}\n\")",
+      "Bash(ls /Users/arnaldohelering/luna/node_modules/react-native-reanimated/lib/module/publicGlobals* 2>&1)",
+      "Bash($HOME/Library/Android/sdk/platform-tools/adb logcat -c)",
+      "Bash(npx expo run:android 2>&1)",
+      "Bash(export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" && npx expo run:android 2>&1)",
+      "Bash(cat /Users/arnaldohelering/luna/node_modules/react-native-purchases/package.json | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version','?'\\)\\)\")",
+      "Bash(echo \"sdk.dir=$HOME/Library/Android/sdk\" > /Users/arnaldohelering/luna/android/local.properties && cat /Users/arnaldohelering/luna/android/local.properties)",
+      "Bash(export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" && export ANDROID_HOME=\"$HOME/Library/Android/sdk\" && npx expo run:android 2>&1)"
     ]
   }
 }
