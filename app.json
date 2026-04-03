@@ -34,14 +34,14 @@
       "expo-notifications"
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
     },
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "b7426345-1406-422f-b275-d261891b4daf"
+        "projectId": "e5df6fe0-a109-4e2d-afab-a555877da3a3"
       }
-    }
+    },
+    "owner": "lunaciclo"
   }
 }

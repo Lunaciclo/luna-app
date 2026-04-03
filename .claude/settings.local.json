@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const p = require\\('/Users/arnaldohelering/luna/node_modules/react-native-worklets/plugin/index.js'\\); console.log\\(typeof p\\)\" 2>&1)",
+      "Bash(node -e \"const p = require\\('/Users/arnaldohelering/luna/node_modules/react-native-reanimated/plugin/index.js'\\); console.log\\(typeof p\\)\" 2>&1)",
+      "Bash(node -e \"\ntry {\n  const preset = require\\('babel-preset-expo'\\);\n  const config = preset\\(null, {}\\);\n  console.log\\('Plugins:', config.plugins?.map\\(p => Array.isArray\\(p\\) ? p[0] : typeof p === 'string' ? p : p.name || 'unknown'\\).filter\\(Boolean\\).join\\(', '\\)\\);\n} catch\\(e\\) { console.log\\('Error:', e.message\\); }\n\" 2>&1 | head -20)",
+      "Bash(node -e \"console.log\\(require\\('babel-preset-expo/package.json'\\).version\\)\" 2>&1)",
+      "Bash(node -e \"\nconst path = require\\('path'\\);\nconst presetPath = require.resolve\\('babel-preset-expo'\\);\nconst dir = path.dirname\\(presetPath\\);\nconsole.log\\('Preset dir:', dir\\);\n\" 2>&1)",
+      "Bash(node -e \"\nconst pkg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-reanimated/package.json'\\);\nconsole.log\\('reanimated installed:', pkg.version\\);\nconsole.log\\('reanimated peerDeps worklets:', pkg.peerDependencies['react-native-worklets']\\);\nconst wPkg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-worklets/package.json'\\);\nconsole.log\\('worklets installed:', wPkg.version\\);\nconst svg = require\\('/Users/arnaldohelering/luna/node_modules/react-native-svg/package.json'\\);\nconsole.log\\('svg installed:', svg.version\\);\n\")"
+    ]
+  }
+}
