@@ -14,7 +14,28 @@
       "Bash(export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" && npx expo run:android 2>&1)",
       "Bash(cat /Users/arnaldohelering/luna/node_modules/react-native-purchases/package.json | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version','?'\\)\\)\")",
       "Bash(echo \"sdk.dir=$HOME/Library/Android/sdk\" > /Users/arnaldohelering/luna/android/local.properties && cat /Users/arnaldohelering/luna/android/local.properties)",
-      "Bash(export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" && export ANDROID_HOME=\"$HOME/Library/Android/sdk\" && npx expo run:android 2>&1)"
+      "Bash(export JAVA_HOME=\"/Applications/Android Studio.app/Contents/jbr/Contents/Home\" && export ANDROID_HOME=\"$HOME/Library/Android/sdk\" && npx expo run:android 2>&1)",
+      "Bash($HOME/Library/Android/sdk/platform-tools/adb devices -l 2>/dev/null)",
+      "Bash(adb logcat -c 2>&1; echo \"done\")",
+      "Bash(which adb && adb devices)",
+      "Bash(cd /Users/arnaldohelering/luna/android && ./gradlew assembleDebug 2>&1 | tail -100)",
+      "Bash(cd /Users/arnaldohelering/luna/android && ./gradlew assembleDebug 2>&1)",
+      "Bash(cd /Users/arnaldohelering/luna/android && ./gradlew :app:compileDebugKotlin --info 2>&1 | grep -A 5 \"e:\" | head -100)",
+      "Bash(./gradlew :app:compileDebugKotlin 2>&1 | grep -E \"^e:|error:|Error\" | head -30)",
+      "Bash(cd /Users/arnaldohelering/luna && node -e \"console.log\\(require\\('expo/package.json'\\).version\\)\")",
+      "Bash(cd /Users/arnaldohelering/luna/android && ./gradlew :app:compileDebugKotlin 2>&1 | grep -E \"^e:|FAILED|BUILD SUCCESS|BUILD FAILED\" | head -20)",
+      "Bash(./gradlew assembleDebug 2>&1 | tail -10)",
+      "Bash(adb logcat -c && echo \"logcat cleared\")",
+      "Bash(adb install -r /Users/arnaldohelering/luna/android/app/build/outputs/apk/debug/app-debug.apk 2>&1)",
+      "Bash(adb devices && ls -la /Users/arnaldohelering/luna/android/app/build/outputs/apk/debug/app-debug.apk)",
+      "Bash(adb install /Users/arnaldohelering/luna/android/app/build/outputs/apk/debug/app-debug.apk)",
+      "Bash(cat /private/tmp/claude-501/-Users-arnaldohelering-luna/tasks/b10dd54.output 2>/dev/null; echo \"---\"; adb shell pm list packages | grep luna 2>/dev/null)",
+      "Bash(adb kill-server && sleep 2 && adb start-server && sleep 2 && adb devices)",
+      "Bash(sleep 10 && adb devices)",
+      "Bash(adb emu kill 2>/dev/null; pkill -f \"qemu-system\" 2>/dev/null; sleep 3 && adb kill-server && sleep 2 && adb start-server && echo \"adb restarted\")",
+      "Bash(adb devices)",
+      "Bash($HOME/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager --list --installed 2>/dev/null | grep system-images)",
+      "Bash(yes | $HOME/Library/Android/sdk/cmdline-tools/latest/bin/sdkmanager \"system-images;android-34;google_apis;arm64-v8a\" 2>&1)"
     ]
   }
 }
