@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -7,14 +7,13 @@ import Animated, {
   withSequence,
   withDelay,
   Easing,
-  runOnJS,
 } from 'react-native-reanimated';
-import { useRouter } from 'expo-router';
+import { Redirect } from 'expo-router';
 import { Colors } from '../../theme/colors';
 import { Typography } from '../../theme/typography';
 
 export default function SplashScreen() {
-  const router = useRouter();
+  const [ready, setReady] = useState(false);
   const scale = useSharedValue(0.5);
   const opacity = useSharedValue(0);
   const textOpacity = useSharedValue(0);
@@ -28,10 +27,14 @@ export default function SplashScreen() {
     textOpacity.value = withDelay(400, withTiming(1, { duration: 500 }));
 
     const timer = setTimeout(() => {
-      router.push('/(onboarding)/hello');
+      setReady(true);
     }, 2500);
     return () => clearTimeout(timer);
   }, []);
+
+  if (ready) {
+    return <Redirect href="/(onboarding)/hello" />;
+  }
 
   const logoStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],

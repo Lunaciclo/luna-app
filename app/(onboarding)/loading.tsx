@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-import { useRouter } from 'expo-router';
+import { Redirect } from 'expo-router';
 import { Colors } from '../../theme/colors';
 import { Typography } from '../../theme/typography';
 import { Spacing } from '../../theme/spacing';
@@ -28,9 +28,9 @@ const MESSAGES = [
 ];
 
 export default function LoadingScreen() {
-  const router = useRouter();
   const [progress, setProgress] = useState(0);
   const [showBadge, setShowBadge] = useState(false);
+  const [navigateToResult, setNavigateToResult] = useState(false);
   const animatedProgress = useSharedValue(0);
   const badgeOpacity = useSharedValue(0);
 
@@ -43,7 +43,7 @@ export default function LoadingScreen() {
           setShowBadge(true);
           badgeOpacity.value = withTiming(1, { duration: 400 });
           setTimeout(() => {
-            router.replace('/(onboarding)/result');
+            setNavigateToResult(true);
           }, 800);
           return 100;
         }
@@ -53,6 +53,10 @@ export default function LoadingScreen() {
 
     return () => clearInterval(interval);
   }, []);
+
+  if (navigateToResult) {
+    return <Redirect href="/(onboarding)/result" />;
+  }
 
   useEffect(() => {
     animatedProgress.value = withTiming(progress, {
