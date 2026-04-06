@@ -10,6 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Button } from "../../components/ui/Button";
 import { useOnboardingStore } from "../../store/useOnboardingStore";
+import { useUserStore } from "../../store/useUserStore";
 import { Colors } from "../../theme/colors";
 import { Spacing } from "../../theme/spacing";
 import { Typography } from "../../theme/typography";
@@ -17,6 +18,7 @@ import { Typography } from "../../theme/typography";
 export default function WelcomeScreen() {
   const router = useRouter();
   const { name } = useOnboardingStore();
+  const { setOnboardingComplete } = useUserStore();
   const scale = useSharedValue(0);
   const titleOpacity = useSharedValue(0);
   const confettiOpacity = useSharedValue(0);
@@ -60,8 +62,7 @@ export default function WelcomeScreen() {
         <Button
           title="Começar a usar a Luna"
           onPress={() => {
-            // Navigate to root — index.tsx will see onboarding is complete
-            // and redirect to /(app)/today with a clean stack
+            setOnboardingComplete(true);
             router.replace("/(app)/today");
           }}
           variant="pill"
