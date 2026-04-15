@@ -63,7 +63,8 @@
       "Bash(~/Library/Android/sdk/platform-tools/adb devices:*)",
       "Bash(~/Library/Android/sdk/emulator/emulator -avd Pixel_6 -no-snapshot-save)",
       "Bash(echo \"Emulator starting \\(PID: $!\\)\")",
-      "Bash(npx expo:*)"
+      "Bash(npx expo:*)",
+      "Bash(eas build:*)"
     ]
   }
 }

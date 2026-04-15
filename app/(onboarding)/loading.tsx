@@ -34,6 +34,14 @@ export default function LoadingScreen() {
   const animatedProgress = useSharedValue(0);
   const badgeOpacity = useSharedValue(0);
 
+  // ALL hooks before any conditional return
+  useEffect(() => {
+    animatedProgress.value = withTiming(progress, {
+      duration: 100,
+      easing: Easing.linear,
+    });
+  }, [progress]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -54,17 +62,6 @@ export default function LoadingScreen() {
     return () => clearInterval(interval);
   }, []);
 
-  if (navigateToResult) {
-    return <Redirect href="/(onboarding)/result" />;
-  }
-
-  useEffect(() => {
-    animatedProgress.value = withTiming(progress, {
-      duration: 100,
-      easing: Easing.linear,
-    });
-  }, [progress]);
-
   const animatedProps = useAnimatedProps(() => {
     const offset = CIRCUMFERENCE * (1 - animatedProgress.value / 100);
     return {
@@ -72,19 +69,22 @@ export default function LoadingScreen() {
     };
   });
 
-  const currentMessage =
-    [...MESSAGES].reverse().find((m) => progress >= m.threshold)?.text ?? '';
-
   const badgeStyle = useAnimatedStyle(() => ({
     opacity: badgeOpacity.value,
   }));
+
+  const currentMessage =
+    [...MESSAGES].reverse().find((m) => progress >= m.threshold)?.text ?? '';
+
+  if (navigateToResult) {
+    return <Redirect href="/(onboarding)/result" />;
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.ringContainer}>
           <Svg width={RING_SIZE} height={RING_SIZE}>
-            {/* Track circle */}
             <Circle
               cx={RING_SIZE / 2}
               cy={RING_SIZE / 2}
@@ -93,7 +93,6 @@ export default function LoadingScreen() {
               strokeWidth={STROKE_WIDTH}
               fill="none"
             />
-            {/* Animated progress circle */}
             <AnimatedCircle
               cx={RING_SIZE / 2}
               cy={RING_SIZE / 2}
@@ -112,13 +111,11 @@ export default function LoadingScreen() {
             <Text style={styles.percentage}>{progress}%</Text>
           </View>
         </View>
-
         <Text style={styles.message}>{currentMessage}</Text>
       </View>
-
       {showBadge && (
         <Animated.View style={[styles.badge, badgeStyle]}>
-          <Text style={styles.badgeText}>LGPD &bull; ISO 27001</Text>
+          <Text style={styles.badgeText}>LGPD • ISO 27001</Text>
         </Animated.View>
       )}
     </View>
