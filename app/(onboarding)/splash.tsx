@@ -18,6 +18,15 @@ export default function SplashScreen() {
   const opacity = useSharedValue(0);
   const textOpacity = useSharedValue(0);
 
+  const logoStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+    opacity: opacity.value,
+  }));
+
+  const textStyle = useAnimatedStyle(() => ({
+    opacity: textOpacity.value,
+  }));
+
   useEffect(() => {
     scale.value = withSequence(
       withTiming(1.1, { duration: 600, easing: Easing.out(Easing.ease) }),
@@ -35,15 +44,6 @@ export default function SplashScreen() {
   if (ready) {
     return <Redirect href="/(onboarding)/hello" />;
   }
-
-  const logoStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
-    opacity: opacity.value,
-  }));
-
-  const textStyle = useAnimatedStyle(() => ({
-    opacity: textOpacity.value,
-  }));
 
   return (
     <View style={styles.container}>
