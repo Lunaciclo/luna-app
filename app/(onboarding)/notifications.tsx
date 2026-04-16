@@ -44,13 +44,15 @@ export default function NotificationsScreen() {
   }));
 
   async function handleEnable() {
-    const granted = await requestPermission();
-
-    if (granted) {
-      const userName = name || 'Luna';
-      await scheduleAllNotifications(userName, DEFAULT_DAYS_UNTIL_PERIOD);
+    try {
+      const granted = await requestPermission();
+      if (granted) {
+        const userName = name || 'Luna';
+        await scheduleAllNotifications(userName, DEFAULT_DAYS_UNTIL_PERIOD);
+      }
+    } catch (e) {
+      console.warn('Notification error:', e);
     }
-
     router.push('/(onboarding)/health-app');
   }
 
