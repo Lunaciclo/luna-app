@@ -76,6 +76,8 @@ export default function PaywallScreen() {
 
   // Animated values for toggle
   const togglePosition = useSharedValue(billingPeriod === 'monthly' ? 0 : 1);
+  const toggleContainerWidth = SCREEN_WIDTH - Spacing.xl * 2 - Spacing.xs * 2;
+  const togglePillWidth = toggleContainerWidth / 2;
 
   useEffect(() => {
     togglePosition.value = withSpring(billingPeriod === 'monthly' ? 0 : 1);
@@ -101,11 +103,11 @@ export default function PaywallScreen() {
   }, [showWinback]);
 
   const toggleAnimatedStyle = useAnimatedStyle(() => {
-    const containerWidth = Dimensions.get('window').width - Spacing.xl * 2 - Spacing.xs * 2;
-    const pillWidth = containerWidth / 2;
     return {
-      transform: [{ translateX: withTiming(togglePosition.value * pillWidth, { duration: 250 }) }],
-      width: pillWidth,
+      transform: [
+        { translateX: withTiming(togglePosition.value * togglePillWidth, { duration: 250 }) },
+      ],
+      width: togglePillWidth,
     };
   });
 
